@@ -11,10 +11,8 @@ return new class extends Migration
    */
   public function up(): void
   {
-    Schema::create('permission_categories', function (Blueprint $table) {
-      $table->id();
-      $table->string('name');
-      $table->timestamps();
+    Schema::table('roles', function (Blueprint $table) {
+      $table->string('uuid')->after('id');
     });
   }
 
@@ -23,6 +21,8 @@ return new class extends Migration
    */
   public function down(): void
   {
-    Schema::dropIfExists('permission_categories');
+    Schema::table('roles', function (Blueprint $table) {
+      $table->dropColumn('uuid');
+    });
   }
 };

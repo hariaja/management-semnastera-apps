@@ -3,9 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Models\Permission as ModelPermission;
 
-class Permission extends Model
+class Permission extends ModelPermission
 {
-    use HasFactory;
+  use HasFactory;
+
+  /**
+   * Relation to permission category model.
+   */
+  public function permissionCategory()
+  {
+    return $this->belongsTo(PermissionCategory::class, 'permission_category_id');
+  }
 }

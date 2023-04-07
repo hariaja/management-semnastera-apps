@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Traits\Uuid;
+use Spatie\Permission\Models\Role as ModelRole;
 
-class Role extends Model
+class Role extends ModelRole
 {
-    use HasFactory;
+  use Uuid;
 }
