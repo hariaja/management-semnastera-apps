@@ -3,11 +3,24 @@
 namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Settings\UserRequest;
 use App\Models\User;
+use App\Services\User\UserService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+  /**
+   * Create a new controller instance.
+   *
+   * @return void
+   */
+  public function __construct(
+    protected UserService $userService
+  ) {
+    // 
+  }
+
   /**
    * Display a listing of the resource.
    */
@@ -37,7 +50,7 @@ class UserController extends Controller
    */
   public function show(User $user)
   {
-    //
+    return view('settings.users.show', compact('user'));
   }
 
   /**
@@ -51,9 +64,10 @@ class UserController extends Controller
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, User $user)
+  public function update(UserRequest $request, User $user)
   {
-    //
+    $this->userService->handleUpdateWithAvatar($user, $request);
+    return redirect()->route('roles.index')->withSuccess(trans('session.update'));
   }
 
   /**
@@ -61,6 +75,9 @@ class UserController extends Controller
    */
   public function destroy(User $user)
   {
-    //
+    $this->userService->handleDeletWithAvatar($user);
+    return response()->json([
+      'message' => trans('session.delete'),
+    ]);
   }
 }

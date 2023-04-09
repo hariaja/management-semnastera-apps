@@ -22,9 +22,11 @@ Route::get('/', function () {
   return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+# Home
+Route::get('home', [HomeController::class, 'index'])
+  ->name('home');
 
 Route::middleware(['auth', 'permission', 'verified'])->group(function () {
   # Setting menu

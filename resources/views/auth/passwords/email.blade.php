@@ -32,11 +32,13 @@
               <form method="POST" action="{{ route('password.email') }}">
                 @csrf
 
-                <div class="mb-4">
-                  <input id="email" type="email" class="form-control @error('email') is-invalid @enderror form-control-lg form-control-alt" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="{{ trans('Alamat Email') }}">
-                  @error('email')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                  @enderror
+                <div class="py-3">
+                  <div class="mb-4">
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror form-control-lg form-control-alt" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="{{ trans('Alamat Email') }}">
+                    @error('email')
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                  </div>
                 </div>
 
                 <div class="row justify-content-center mb-4">

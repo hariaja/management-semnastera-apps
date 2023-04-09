@@ -2,9 +2,10 @@
 
 namespace App\Repositories\Role;
 
-use LaravelEasyRepository\Implementations\Eloquent;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use App\Helpers\Global\Constant;
+use LaravelEasyRepository\Implementations\Eloquent;
 
 class RoleRepositoryImplement extends Eloquent implements RoleRepository
 {
@@ -40,5 +41,13 @@ class RoleRepositoryImplement extends Eloquent implements RoleRepository
   {
     $role = $this->findOrFail($id);
     return $role->permissions->pluck('name')->toArray();
+  }
+
+  public function roleWhereNotIn()
+  {
+    return $this->model->select('*')->whereNotIn('name', [
+      Constant::ADMIN,
+      Constant::REVIEWER,
+    ])->orderBy('name', 'ASC')->get();
   }
 }

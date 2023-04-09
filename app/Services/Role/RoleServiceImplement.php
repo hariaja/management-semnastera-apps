@@ -64,4 +64,18 @@ class RoleServiceImplement extends Service implements RoleService
     DB::commit();
     return $return;
   }
+
+  public function roleWhereNotIn()
+  {
+    DB::beginTransaction();
+    try {
+      $return = $this->mainRepository->roleWhereNotIn();
+    } catch (Exception $e) {
+      DB::rollBack();
+      Log::info($e->getMessage());
+      throw new InvalidArgumentException(trans('session.log.error'));
+    }
+    DB::commit();
+    return $return;
+  }
 }

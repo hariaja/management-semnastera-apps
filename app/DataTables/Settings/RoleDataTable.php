@@ -26,7 +26,7 @@ class RoleDataTable extends DataTable
       })
       ->addColumn('permission_count', function ($row) {
         if ($row->name === Constant::ADMIN) :
-          return '<span class="badge text-warning">Memiliki Semua Hak Akses</span>';
+          return '<span class="badge text-primary">Memiliki Semua Hak Akses</span>';
         else :
           return $row->permissions->count() . ' Hak Akses';
         endif;

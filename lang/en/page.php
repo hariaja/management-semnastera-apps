@@ -19,11 +19,11 @@ return [
   ],
 
   'users' => [
-    'title' => 'Halaman Pendonor',
-    'index' => 'Tabel Data Pendonor',
-    'create' => 'Tambah Data Pendonor',
-    'edit' => 'Ubah Data Pendonor',
-    'show' => 'Detail Data Pendonor',
+    'title' => 'Halaman Pengguna',
+    'index' => 'Tabel Data Pengguna',
+    'create' => 'Tambah Data Pengguna',
+    'edit' => 'Ubah Data Pengguna',
+    'show' => 'Detail Data Pengguna',
   ],
 
   'roles' => [
