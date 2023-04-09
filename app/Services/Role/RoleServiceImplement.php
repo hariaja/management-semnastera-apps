@@ -78,4 +78,18 @@ class RoleServiceImplement extends Service implements RoleService
     DB::commit();
     return $return;
   }
+
+  public function roleReviewer()
+  {
+    DB::beginTransaction();
+    try {
+      $return = $this->mainRepository->roleReviewer();
+    } catch (Exception $e) {
+      DB::rollBack();
+      Log::info($e->getMessage());
+      throw new InvalidArgumentException(trans('session.log.error'));
+    }
+    DB::commit();
+    return $return;
+  }
 }

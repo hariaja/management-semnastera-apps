@@ -2,9 +2,10 @@
 
 namespace App\Repositories\User;
 
+use Illuminate\Http\Request;
 use LaravelEasyRepository\Repository;
 
 interface UserRepository extends Repository
 {
-  // Write something awesome :)
+  public function orderByName();
 }

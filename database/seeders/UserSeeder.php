@@ -30,5 +30,20 @@ class UserSeeder extends Seeder
     ]);
 
     $admin->assignRole(Constant::ADMIN);
+
+    for ($i = 1; $i <= 20; $i++) :
+      $persenters = User::factory()->create();
+      $persenters->assignRole(Constant::PRESENTER);
+    endfor;
+
+    for ($i = 1; $i <= 10; $i++) :
+      $participant = User::factory()->create();
+      $participant->assignRole(Constant::PARTICIPANT);
+    endfor;
+
+    for ($i = 1; $i <= 5; $i++) :
+      $reviewer = User::factory()->create();
+      $reviewer->assignRole(Constant::REVIEWER);
+    endfor;
   }
 }

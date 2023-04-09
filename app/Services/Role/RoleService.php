@@ -7,8 +7,9 @@ use LaravelEasyRepository\BaseService;
 
 interface RoleService extends BaseService
 {
+  public function roleWhereNotIn();
+  public function roleReviewer();
   public function firstOrCreate(Request $request);
   public function updateOrFail(int $id, Request $request);
   public function roleHasPermissions(int $id);
-  public function roleWhereNotIn();
 }

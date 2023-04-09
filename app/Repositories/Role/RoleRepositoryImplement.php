@@ -47,7 +47,11 @@ class RoleRepositoryImplement extends Eloquent implements RoleRepository
   {
     return $this->model->select('*')->whereNotIn('name', [
       Constant::ADMIN,
-      Constant::REVIEWER,
     ])->orderBy('name', 'ASC')->get();
+  }
+
+  public function roleReviewer()
+  {
+    return $this->model->where('name', Constant::REVIEWER)->get();
   }
 }

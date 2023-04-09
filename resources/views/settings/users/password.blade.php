@@ -33,6 +33,7 @@
         <div class="col-lg-4">
           <p class="fs-sm text-muted">
             {{ trans('Mengubah kata sandi masuk Anda adalah cara mudah untuk menjaga keamanan akun Anda.') }}
+            {{ trans('Secara default password anda adalah "password" tanpa tanda petik (jika anda belum mengubahnya).') }}
           </p>
         </div>
         <div class="col-lg-8 col-xl-5">

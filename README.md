@@ -40,6 +40,7 @@ php artisan storage:link
 ```
 
 ### Note:
-- Pastikan sudah menginstall composer terbaru atau minimal versi 2.4.1
-- Memiliki node JS yang sudah terinstall di local
 - Memiliki PHP versi 8.0 ke atas
+- Memiliki node JS yang sudah terinstall di local
+- Pastikan sudah menginstall composer terbaru atau minimal versi 2.4.1
+- Projek ini dibuat dan dibangun menggunakan Laravel versi 10.6.2 documentation: https://laravel.com/docs/10.x

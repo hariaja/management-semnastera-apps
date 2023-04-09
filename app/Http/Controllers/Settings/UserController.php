@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers\Settings;
 
+use App\DataTables\Scopes\RolesFilter;
+use App\DataTables\Scopes\StatusFilter;
+use App\DataTables\Settings\UserDataTable;
+use App\Helpers\Global\Constant;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\UserRequest;
 use App\Models\User;
+use App\Services\Role\RoleService;
 use App\Services\User\UserService;
 use Illuminate\Http\Request;
 
@@ -16,7 +21,8 @@ class UserController extends Controller
    * @return void
    */
   public function __construct(
-    protected UserService $userService
+    protected RoleService $roleService,
+    protected UserService $userService,
   ) {
     // 
   }
@@ -24,9 +30,9 @@ class UserController extends Controller
   /**
    * Display a listing of the resource.
    */
-  public function index()
+  public function index(UserDataTable $dataTable, Request $request)
   {
-    //
+    return $dataTable->addScope(new StatusFilter($request))->addScope(new RolesFilter($request))->render('settings.users.index');
   }
 
   /**
@@ -34,15 +40,17 @@ class UserController extends Controller
    */
   public function create()
   {
-    //
+    $roles = $this->roleService->roleWhereNotIn();
+    return view('settings.users.create', compact('roles'));
   }
 
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function store(UserRequest $request)
   {
-    //
+    $this->userService->handleCreateWithAvatar($request);
+    return redirect()->route('users.index')->withSuccess(trans('session.create'));
   }
 
   /**
@@ -50,7 +58,11 @@ class UserController extends Controller
    */
   public function show(User $user)
   {
-    return view('settings.users.show', compact('user'));
+    if (me()->uuid === $user->uuid) :
+      return view('settings.users.profile', compact('user'));
+    else :
+      return view('settings.users.show', compact('user'));
+    endif;
   }
 
   /**
@@ -58,7 +70,12 @@ class UserController extends Controller
    */
   public function edit(User $user)
   {
-    //
+    if (me()->uuid === $user->uuid) :
+      return redirect()->back()->with('error', trans('Mohon untuk mengubah data diri anda di halaman profile'));
+    endif;
+
+    $roles = $this->roleService->roleWhereNotIn();
+    return view('settings.users.edit', compact('user', 'roles'));
   }
 
   /**
@@ -67,7 +84,7 @@ class UserController extends Controller
   public function update(UserRequest $request, User $user)
   {
     $this->userService->handleUpdateWithAvatar($user, $request);
-    return redirect()->route('roles.index')->withSuccess(trans('session.update'));
+    return redirect()->route('users.index')->withSuccess(trans('session.update'));
   }
 
   /**
@@ -79,5 +96,19 @@ class UserController extends Controller
     return response()->json([
       'message' => trans('session.delete'),
     ]);
+  }
+
+  protected function checkIfAdmin(User $user, string $message = null)
+  {
+    if (isRoleName() !== $user->hasRole(Constant::ADMIN)) :
+      return redirect()->back()->with('error', $message);
+    endif;
+  }
+
+  protected function onwerUuid(User $user, string $message = null)
+  {
+    if (me()->uuid === $user->uuid) :
+      return redirect()->back()->with('error', $message);
+    endif;
   }
 }

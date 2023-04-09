@@ -4,6 +4,7 @@ namespace App\Helpers\Global;
 
 class Constant
 {
+  public const ALL = 'Semua Status';
   // Role name
   public const ADMIN = 'Administrator';
   public const PRESENTER = 'Pemakalah';

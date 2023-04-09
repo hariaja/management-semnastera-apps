@@ -82,6 +82,12 @@ class User extends Authenticatable
     return $this->roles->implode('id');
   }
 
+  public function scopeExcludeAdmin($query)
+  {
+    return $query->whereDoesntHave('roles', function ($q) {
+      $q->where('name', Constant::ADMIN);
+    });
+  }
 
   /**
    * Get the user status account.
@@ -90,9 +96,9 @@ class User extends Authenticatable
   public function isStatus()
   {
     if ($this->status == Constant::ACTIVE) :
-      return '<span class="badge text-success">Active</span>';
+      return '<span class="badge text-success">' . trans('session.users.active') . '</span>';
     else :
-      return '<span class="badge text-danger">Inactive</span>';
+      return '<span class="badge text-danger">' . trans('session.users.inactive') . '</span>';
     endif;
   }
 

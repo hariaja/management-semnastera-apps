@@ -8,6 +8,8 @@ use LaravelEasyRepository\BaseService;
 
 interface UserService extends BaseService
 {
+  public function orderByName();
+  public function handleCreateWithAvatar(Request $request);
   public function handleUpdateWithAvatar(User $user, Request $request);
   public function handleDeletWithAvatar(User $user);
 }

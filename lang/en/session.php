@@ -10,4 +10,9 @@ return [
   'log' => [
     'error' => 'Tidak dapat melakukan tindakan, Periksa kembali',
   ],
+
+  'users' => [
+    'active' => 'Aktif',
+    'inactive' => 'Tidak Aktif',
+  ],
 ];

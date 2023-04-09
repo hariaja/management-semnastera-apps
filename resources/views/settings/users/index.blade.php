@@ -1,10 +1,10 @@
 @extends('layouts.app')
-@section('title') {{ trans('page.roles.title') }} @endsection
+@section('title') {{ trans('page.users.title') }} @endsection
 @section('hero')
 <div class="bg-body-light">
   <div class="content content-full">
     <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
-      <h1 class="flex-grow-1 fs-3 fw-semibold my-2 my-sm-3">{{ trans('page.roles.title') }}</h1>
+      <h1 class="flex-grow-1 fs-3 fw-semibold my-2 my-sm-3">{{ trans('page.users.title') }}</h1>
     </div>
   </div>
 </div>
@@ -13,11 +13,11 @@
   <div class="block block-rounded">
     <div class="block-header block-header-default">
       <h3 class="block-title">
-        {{ trans('page.roles.index') }}
+        {{ trans('page.users.index') }}
       </h3>
       <div class="block-options">
-        @can('roles.create')
-          <a href="{{ route('roles.create') }}" class="btn btn-block-option text-secondary fw-semibold">
+        @can('users.create')
+          <a href="{{ route('users.create') }}" class="btn btn-block-option text-secondary fw-semibold">
             <i class="fa fa-plus fa-xs me-1"></i>
             {{ trans('page.button.create') }}
           </a>
@@ -25,6 +25,30 @@
       </div>
     </div>
     <div class="block-content">
+
+      <div class="row justify-content-center">
+        <div class="col-md-4">
+          <div class="mb-4">
+            <label for="status" class="form-label">{{ trans('Filter Status') }}</label>
+            <select type="text" class="form-select" name="status" id="status">
+              <option value="{{ Constant::ALL }}">{{ Constant::ALL }}</option>
+              <option value="{{ Constant::ACTIVE }}">{{ trans('Active') }}</option>
+              <option value="{{ Constant::INACTIVE }}">{{ trans('Inactive') }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="mb-1">
+            <label for="roles" class="form-label">{{ trans('Filter Peran') }}</label>
+            <select type="text" class="form-select" name="roles" id="roles">
+              <option value="{{ Constant::ALL }}">{{ Constant::ALL }}</option>
+              <option value="{{ Constant::PRESENTER }}">{{ Constant::PRESENTER }}</option>
+              <option value="{{ Constant::PARTICIPANT }}">{{ Constant::PARTICIPANT }}</option>
+              <option value="{{ Constant::REVIEWER }}">{{ Constant::REVIEWER }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
 
       <div class="my-3">
         {{ $dataTable->table() }}
@@ -41,9 +65,19 @@
 
     $(function () {
       table = $('.table').DataTable()
+
+      $('#status').on('change', function (e) {
+        table.draw()
+        e.preventDefault()
+      })
+
+      $('#roles').on('change', function (e) {
+        table.draw()
+        e.preventDefault()
+      })
     })
 
-    function deleteRole(url) {
+    function deleteUser(url) {
       Swal.fire({
         icon: 'warning',
         title: 'Apakah Anda Yakin?',

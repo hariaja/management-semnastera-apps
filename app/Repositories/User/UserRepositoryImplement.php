@@ -2,8 +2,9 @@
 
 namespace App\Repositories\User;
 
-use LaravelEasyRepository\Implementations\Eloquent;
 use App\Models\User;
+use Illuminate\Http\Request;
+use LaravelEasyRepository\Implementations\Eloquent;
 
 class UserRepositoryImplement extends Eloquent implements UserRepository
 {
@@ -19,5 +20,8 @@ class UserRepositoryImplement extends Eloquent implements UserRepository
     $this->model = $model;
   }
 
-  // Write something awesome :)
+  public function orderByName()
+  {
+    return $this->model->excludeAdmin()->orderBy('name', 'ASC');
+  }
 }

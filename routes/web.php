@@ -40,6 +40,6 @@ Route::middleware(['auth', 'permission', 'verified'])->group(function () {
 
     # User management
     Route::patch('users/status/{user}', [UserController::class, 'status'])->name('users.status');
-    Route::resource('users', UserController::class)->only('index', 'show', 'update');
+    Route::resource('users', UserController::class);
   });
 });
