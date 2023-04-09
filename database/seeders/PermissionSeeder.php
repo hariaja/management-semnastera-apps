@@ -112,6 +112,50 @@ class PermissionSeeder extends Seeder
         'created_at' => now(),
         'updated_at' => now()
       ],
+
+      // Halaman Registration
+      [
+        'name' => 'registrations.index',
+        'permission_category_id' => 3,
+        'guard_name' => 'web',
+        'created_at' => now(),
+        'updated_at' => now()
+      ],
+      [
+        'name' => 'registrations.create',
+        'permission_category_id' => 3,
+        'guard_name' => 'web',
+        'created_at' => now(),
+        'updated_at' => now()
+      ],
+      [
+        'name' => 'registrations.store',
+        'permission_category_id' => 3,
+        'guard_name' => 'web',
+        'created_at' => now(),
+        'updated_at' => now()
+      ],
+      [
+        'name' => 'registrations.edit',
+        'permission_category_id' => 3,
+        'guard_name' => 'web',
+        'created_at' => now(),
+        'updated_at' => now()
+      ],
+      [
+        'name' => 'registrations.update',
+        'permission_category_id' => 3,
+        'guard_name' => 'web',
+        'created_at' => now(),
+        'updated_at' => now()
+      ],
+      [
+        'name' => 'registrations.destroy',
+        'permission_category_id' => 3,
+        'guard_name' => 'web',
+        'created_at' => now(),
+        'updated_at' => now()
+      ],
     ];
 
     $collects = collect($permissions);

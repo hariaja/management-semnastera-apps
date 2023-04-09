@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Settings\RoleController;
 use App\Http\Controllers\Settings\UserController;
 use App\Http\Controllers\Settings\PasswordController;
+use App\Http\Controllers\Pappers\RegistrationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,5 +42,10 @@ Route::middleware(['auth', 'permission', 'verified'])->group(function () {
     # User management
     Route::patch('users/status/{user}', [UserController::class, 'status'])->name('users.status');
     Route::resource('users', UserController::class);
+  });
+
+  # Pappers
+  Route::prefix('pappers')->group(function () {
+    Route::resource('registrations', RegistrationController::class)->except('show');
   });
 });

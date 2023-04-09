@@ -5,6 +5,7 @@ namespace App\Helpers\Global;
 class Constant
 {
   public const ALL = 'Semua Status';
+
   // Role name
   public const ADMIN = 'Administrator';
   public const PRESENTER = 'Pemakalah';
@@ -27,6 +28,9 @@ class Constant
   public const PENDING = 'Pending';
   public const APPROVED = 'Approved';
   public const REJECTED = 'Rejected';
+
+  public const OPEN = 'Open';
+  public const CLOSE = 'Closed';
 
   // Dummy
   const NO_REK = "5410401330";

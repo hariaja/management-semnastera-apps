@@ -22,4 +22,14 @@ return [
     'update' => 'Memperbarui Peran',
     'destroy' => 'Menghapus Peran',
   ],
+
+  'registrations' => [
+    'name' => 'Management Jadwal',
+    'index' => 'List Submissions',
+    'create' => 'Formulir Tambah Submissions',
+    'store' => 'Menambahkan Submissions',
+    'edit' => 'Formulir Ubah Submissions',
+    'update' => 'Memperbarui Submissions',
+    'destroy' => 'Menghapus Submissions',
+  ],
 ];

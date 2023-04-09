@@ -38,9 +38,7 @@
               <label class="form-label" for="name">{{ trans('Nama Peran') }}</label>
               <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror" onkeypress="return hanyaHuruf(event)">
               @error('name')
-                <div class="invalid-feedback">
-                  <strong>{{ $message }}</strong>
-                </div>
+                <div class="invalid-feedback">{{ $message }}</div>
               @enderror
             </div>
 
@@ -50,15 +48,11 @@
                   <input type="checkbox" name="all_permission" id="all_permission" class="form-check-input @error('permission') is-invalid @enderror">
                   <label for="all_permission" class="form-check-label">{{ trans('Pilih Semua Hak Akses') }}</label>
                   @error('permission')
-                    <div class="invalid-feedback">
-                      <strong>{{ $message }}</strong>
-                    </div>
+                    <div class="invalid-feedback">{{ $message }}</div>
                   @enderror
                 </div>
               </div>
             </div>
-
-
 
           </div>
         </div>
@@ -91,7 +85,7 @@
 
         <div class="row justify-content-center">
           <div class="col-md-6">
-            <div class="mb-3">
+            <div class="mb-4">
               <button type="submit" class="btn btn-primary w-100" data-toggle="click-ripple">
                 <i class="fa fa-fw fa-circle-check opacity-50 me-1"></i>
                 {{ trans('page.create') }}

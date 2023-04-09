@@ -33,4 +33,12 @@ return [
     'edit' => 'Ubah Data Role & Permission',
     'show' => 'Detail Data Role & Permission',
   ],
+
+  'registrations' => [
+    'title' => 'Halaman Jadwal Submit',
+    'index' => 'Tabel Data Jadwal Submit',
+    'create' => 'Tambah Data Jadwal Submit',
+    'edit' => 'Ubah Data Jadwal Submit',
+    'show' => 'Detail Data Jadwal Submit',
+  ],
 ];

@@ -44,6 +44,25 @@
         </li>
 
         @canany(['roles.index', 'users.index'])
+          <li class="nav-main-heading">{{ trans('Papper') }}</li>
+          <li class="nav-main-item {{ request()->is('pappers*') ? 'open' : '' }}">
+            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="{{ request()->is('pappers*') ? 'true' : 'false' }}" href="#">
+              <i class="nav-main-link-icon fa fa-file"></i>
+              <span class="nav-main-link-name">{{ trans('Papper') }}</span>
+            </a>
+            <ul class="nav-main-submenu">
+              @can('registrations.index')
+              <li class="nav-main-item">
+                <a class="nav-main-link {{ request()->is('pappers/registrations*') ? 'active' : '' }}" href="{{ route('registrations.index') }}">
+                  <span class="nav-main-link-name">{{ trans('Jadwal Submit') }}</span>
+                </a>
+              </li>
+              @endcan
+            </ul>
+          </li>
+        @endcan
+
+        @canany(['roles.index', 'users.index'])
           <li class="nav-main-heading">{{ trans('Management') }}</li>
           <li class="nav-main-item {{ Request::is('settings*') ? 'open' : '' }}">
             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="{{ Request::is('settings*') ? 'true' : 'false' }}" href="#">
