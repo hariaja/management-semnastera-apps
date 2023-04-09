@@ -34,6 +34,11 @@ Jalankan serve dengan:
 php artisan serve
 ```
 
+Jika ketika menjalankan projek ada gambar yang tidak muncul, cukup jalankan perintah
+```
+php artisan storage:link
+```
+
 ### Note:
 - Pastikan sudah menginstall composer terbaru atau minimal versi 2.4.1
 - Memiliki node JS yang sudah terinstall di local
