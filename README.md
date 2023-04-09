@@ -33,14 +33,12 @@ Jalankan serve dengan:
 ```
 php artisan serve
 ```
-
 Jika ketika menjalankan projek ada gambar yang tidak muncul, cukup jalankan perintah
 ```
 php artisan storage:link
 ```
 
 ### Note:
-- Memiliki PHP versi 8.0 ke atas
-- Memiliki node JS yang sudah terinstall di local
 - Pastikan sudah menginstall composer terbaru atau minimal versi 2.4.1
+- Memiliki PHP versi 8.0 ke atas dan node JS yang sudah terinstall di local
 - Projek ini dibuat dan dibangun menggunakan Laravel versi 10.6.2 documentation: https://laravel.com/docs/10.x
