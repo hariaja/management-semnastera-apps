@@ -1,6 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Settings\RoleController;
+use App\Http\Controllers\Settings\UserController;
+use App\Http\Controllers\Settings\PasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +19,25 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+  return view('welcome');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::middleware(['auth', 'permission', 'verified'])->group(function () {
+  # Setting menu
+  Route::prefix('settings')->group(function () {
+    # Role & permission
+    Route::resource('roles', RoleController::class)->except('show');
+
+    # User management password
+    Route::get('users/password/{user}', [PasswordController::class, 'showChangePasswordForm'])->name('users.password');
+    Route::post('users/password', [PasswordController::class, 'store']);
+
+    # User management
+    Route::patch('users/status/{user}', [UserController::class, 'status'])->name('users.status');
+    Route::resource('users', UserController::class)->only('index', 'show', 'update');
+  });
+});

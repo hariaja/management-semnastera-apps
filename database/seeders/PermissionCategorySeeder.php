@@ -2,16 +2,26 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\PermissionCategory;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class PermissionCategorySeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
-    {
-        //
-    }
+  /**
+   * Run the database seeds.
+   */
+  public function run(): void
+  {
+    $items = [
+      'users.name',
+      'roles.name',
+    ];
+
+    foreach ($items as $item) :
+      PermissionCategory::create([
+        'name' => $item
+      ]);
+    endforeach;
+  }
 }
