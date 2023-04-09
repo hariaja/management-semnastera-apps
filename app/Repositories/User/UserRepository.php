@@ -8,4 +8,5 @@ use LaravelEasyRepository\Repository;
 interface UserRepository extends Repository
 {
   public function orderByName();
+  public function changeStatus(int $id);
 }

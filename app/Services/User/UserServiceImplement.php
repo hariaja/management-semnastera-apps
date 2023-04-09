@@ -124,4 +124,18 @@ class UserServiceImplement extends Service implements UserService
     DB::commit();
     return $return;
   }
+
+  public function changeStatus(int $id)
+  {
+    DB::beginTransaction();
+    try {
+      $return = $this->mainRepository->changeStatus($id);
+    } catch (Exception $e) {
+      DB::rollBack();
+      Log::info($e->getMessage());
+      throw new InvalidArgumentException(trans('session.log.error'));
+    }
+    DB::commit();
+    return $return;
+  }
 }

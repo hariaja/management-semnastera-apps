@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -139,5 +140,15 @@ class User extends Authenticatable
   public function getInactive(): Collection
   {
     return $this->inactive()->get();
+  }
+
+  /**
+   * Relation to transaction model.
+   *
+   * @return HasMany
+   */
+  public function transactions(): HasMany
+  {
+    return $this->hasMany(Transaction::class, 'user_id');
   }
 }

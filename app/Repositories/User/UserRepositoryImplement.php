@@ -4,6 +4,7 @@ namespace App\Repositories\User;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Helpers\Global\Constant;
 use LaravelEasyRepository\Implementations\Eloquent;
 
 class UserRepositoryImplement extends Eloquent implements UserRepository
@@ -23,5 +24,22 @@ class UserRepositoryImplement extends Eloquent implements UserRepository
   public function orderByName()
   {
     return $this->model->excludeAdmin()->orderBy('name', 'ASC');
+  }
+
+  public function changeStatus(int $id)
+  {
+    $user = $this->findOrFail($id);
+
+    if ($user->status == Constant::ACTIVE) :
+      $user->updateOrFail([
+        'status' => Constant::INACTIVE,
+      ]);
+    else :
+      $user->updateOrFail([
+        'status' => Constant::ACTIVE,
+      ]);
+    endif;
+
+    return $user;
   }
 }

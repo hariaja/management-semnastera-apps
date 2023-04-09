@@ -16,6 +16,11 @@ use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
 class UserDataTable extends DataTable
 {
+  /**
+   * Create a new datatable instance.
+   *
+   * @return void
+   */
   public function __construct(protected UserService $userService)
   {
     // 
@@ -50,11 +55,13 @@ class UserDataTable extends DataTable
           return '<span class="badge text-warning">' . Constant::REVIEWER . '</span>';
         endif;
       })
+      ->addColumn('edit_status', 'settings.users.status')
       ->addColumn('action', 'settings.users.action')
       ->rawColumns([
         'status',
         'action',
         'roles',
+        'edit_status',
       ]);
   }
 
@@ -107,6 +114,9 @@ class UserDataTable extends DataTable
    */
   public function getColumns(): array
   {
+
+    $visibility = isRoleName() === Constant::ADMIN ? true : false;
+
     return [
       Column::make('DT_RowIndex')
         ->title(trans('#'))
@@ -125,6 +135,10 @@ class UserDataTable extends DataTable
         ->addClass('text-center'),
       Column::make('status')
         ->title(trans('Status Akun'))
+        ->addClass('text-center'),
+      Column::make('edit_status')
+        ->title(trans('Ubah Status'))
+        ->visible($visibility)
         ->addClass('text-center'),
       Column::computed('action')
         ->exportable(false)

@@ -98,17 +98,14 @@ class UserController extends Controller
     ]);
   }
 
-  protected function checkIfAdmin(User $user, string $message = null)
+  /**
+   * Change the user status.
+   */
+  public function status(User $user)
   {
-    if (isRoleName() !== $user->hasRole(Constant::ADMIN)) :
-      return redirect()->back()->with('error', $message);
-    endif;
-  }
-
-  protected function onwerUuid(User $user, string $message = null)
-  {
-    if (me()->uuid === $user->uuid) :
-      return redirect()->back()->with('error', $message);
-    endif;
+    $this->userService->changeStatus($user->id);
+    return response()->json([
+      'message' => trans('session.status'),
+    ]);
   }
 }

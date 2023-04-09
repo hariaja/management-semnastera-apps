@@ -43,7 +43,7 @@
           </a>
         </li>
 
-        @canany(['roles.index', 'users.index'])
+        @canany(['registrations.index', 'transactions.index'])
           <li class="nav-main-heading">{{ trans('Papper') }}</li>
           <li class="nav-main-item {{ request()->is('pappers*') ? 'open' : '' }}">
             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="{{ request()->is('pappers*') ? 'true' : 'false' }}" href="#">
@@ -51,12 +51,19 @@
               <span class="nav-main-link-name">{{ trans('Papper') }}</span>
             </a>
             <ul class="nav-main-submenu">
+              @can('transactions.index')
+                <li class="nav-main-item">
+                  <a class="nav-main-link {{ request()->is('pappers/transactions*') ? 'active' : '' }}" href="{{ route('transactions.index') }}">
+                    <span class="nav-main-link-name">{{ trans('Pembayaran') }}</span>
+                  </a>
+                </li>
+              @endcan
               @can('registrations.index')
-              <li class="nav-main-item">
-                <a class="nav-main-link {{ request()->is('pappers/registrations*') ? 'active' : '' }}" href="{{ route('registrations.index') }}">
-                  <span class="nav-main-link-name">{{ trans('Jadwal Submit') }}</span>
-                </a>
-              </li>
+                <li class="nav-main-item">
+                  <a class="nav-main-link {{ request()->is('pappers/registrations*') ? 'active' : '' }}" href="{{ route('registrations.index') }}">
+                    <span class="nav-main-link-name">{{ trans('Jadwal Submit') }}</span>
+                  </a>
+                </li>
               @endcan
             </ul>
           </li>
@@ -71,18 +78,18 @@
             </a>
             <ul class="nav-main-submenu">
               @can('users.index')
-              <li class="nav-main-item">
-                <a class="nav-main-link {{ Request::is('settings/users*') ? 'active' : '' }}" href="{{ route('users.index') }}">
-                  <span class="nav-main-link-name">{{ trans('Pengguna') }}</span>
-                </a>
-              </li>
+                <li class="nav-main-item">
+                  <a class="nav-main-link {{ Request::is('settings/users*') ? 'active' : '' }}" href="{{ route('users.index') }}">
+                    <span class="nav-main-link-name">{{ trans('Pengguna') }}</span>
+                  </a>
+                </li>
               @endcan
               @can('roles.index')
-              <li class="nav-main-item">
-                <a class="nav-main-link {{ Request::is('settings/roles*') ? 'active' : '' }}" href="{{ route('roles.index') }}">
-                  <span class="nav-main-link-name">{{ trans('Role & Permission') }}</span>
-                </a>
-              </li>
+                <li class="nav-main-item">
+                  <a class="nav-main-link {{ Request::is('settings/roles*') ? 'active' : '' }}" href="{{ route('roles.index') }}">
+                    <span class="nav-main-link-name">{{ trans('Role & Permission') }}</span>
+                  </a>
+                </li>
               @endcan
             </ul>
           </li>

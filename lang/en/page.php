@@ -41,4 +41,12 @@ return [
     'edit' => 'Ubah Data Jadwal Submit',
     'show' => 'Detail Data Jadwal Submit',
   ],
+
+  'transactions' => [
+    'title' => 'Halaman Transaksi',
+    'index' => 'Tabel Data Transaksi',
+    'create' => 'Tambah Data Transaksi',
+    'edit' => 'Ubah Data Transaksi',
+    'show' => 'Detail Data Transaksi',
+  ],
 ];

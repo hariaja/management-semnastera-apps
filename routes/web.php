@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Settings\RoleController;
 use App\Http\Controllers\Settings\UserController;
 use App\Http\Controllers\Settings\PasswordController;
+use App\Http\Controllers\Pappers\TransactionController;
 use App\Http\Controllers\Pappers\RegistrationController;
 
 /*
@@ -46,6 +47,7 @@ Route::middleware(['auth', 'permission', 'verified'])->group(function () {
 
   # Pappers
   Route::prefix('pappers')->group(function () {
+    Route::resource('transactions', TransactionController::class)->except('destroy', 'edit');
     Route::resource('registrations', RegistrationController::class)->except('show');
   });
 });
