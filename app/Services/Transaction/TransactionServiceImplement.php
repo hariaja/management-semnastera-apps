@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Http\Request;
 use InvalidArgumentException;
 use App\Helpers\Global\Constant;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
 use LaravelEasyRepository\Service;
 use Illuminate\Support\Facades\Log;
@@ -81,6 +82,25 @@ class TransactionServiceImplement extends Service implements TransactionService
       endif;
 
       $return = $this->mainRepository->updateOrFail($id, $request, $reason);
+    } catch (Exception $e) {
+      DB::rollBack();
+      Log::info($e->getMessage());
+      throw new InvalidArgumentException(trans('session.log.error'));
+    }
+    DB::commit();
+    return $return;
+  }
+
+  public function handleDeleteWithImage(Transaction $transaction)
+  {
+    DB::beginTransaction();
+    try {
+      // Hapus foto lama.
+      if ($transaction->proof) :
+        Storage::delete($transaction->proof);
+      endif;
+
+      $return = $this->mainRepository->delete($transaction->id);
     } catch (Exception $e) {
       DB::rollBack();
       Log::info($e->getMessage());

@@ -92,7 +92,7 @@ class UserController extends Controller
    */
   public function destroy(User $user)
   {
-    $this->userService->handleDeletWithAvatar($user);
+    $this->userService->handleDeleteWithAvatar($user);
     return response()->json([
       'message' => trans('session.delete'),
     ]);

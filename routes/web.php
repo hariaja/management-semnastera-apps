@@ -46,7 +46,7 @@ Route::middleware(['auth', 'permission', 'verified'])->group(function () {
 
   # Pappers
   Route::prefix('pappers')->group(function () {
-    Route::resource('transactions', TransactionController::class)->except('destroy', 'edit');
+    Route::resource('transactions', TransactionController::class)->except('edit');
     Route::resource('registrations', RegistrationController::class)->except('show');
   });
 });

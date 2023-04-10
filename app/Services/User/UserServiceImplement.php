@@ -106,12 +106,12 @@ class UserServiceImplement extends Service implements UserService
     return $return;
   }
 
-  public function handleDeletWithAvatar(User $user)
+  public function handleDeleteWithAvatar(User $user)
   {
     DB::beginTransaction();
     try {
       // Hapus foto lama.
-      if ($user->old_avatar) :
+      if ($user->avatar) :
         Storage::delete($user->avatar);
       endif;
 

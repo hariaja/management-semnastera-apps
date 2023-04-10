@@ -72,14 +72,6 @@ class TransactionController extends Controller
   }
 
   /**
-   * Show the form for editing the specified resource.
-   */
-  public function edit(Transaction $transaction)
-  {
-    //
-  }
-
-  /**
    * Update the specified resource in storage.
    */
   public function update(Request $request, Transaction $transaction)
@@ -97,6 +89,9 @@ class TransactionController extends Controller
    */
   public function destroy(Transaction $transaction)
   {
-    //
+    $this->transactionService->handleDeleteWithImage($transaction);
+    return response()->json([
+      'message' => trans('session.delete'),
+    ]);
   }
 }
