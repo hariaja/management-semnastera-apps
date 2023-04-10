@@ -2,8 +2,10 @@
 
 namespace App\Repositories\Registration;
 
-use LaravelEasyRepository\Implementations\Eloquent;
+use App\Helpers\Global\Constant;
 use App\Models\Registration;
+use Illuminate\Support\Carbon;
+use LaravelEasyRepository\Implementations\Eloquent;
 
 class RegistrationRepositoryImplement extends Eloquent implements RegistrationRepository
 {
@@ -19,5 +21,12 @@ class RegistrationRepositoryImplement extends Eloquent implements RegistrationRe
     $this->model = $model;
   }
 
-  // Write something awesome
+  public function getOpenByDate()
+  {
+    return $this->model->all()->filter(function ($item) {
+      if (Carbon::now()->between($item->date_start, $item->date_end)) {
+        return $item;
+      }
+    })->where('status', Constant::OPEN);
+  }
 }

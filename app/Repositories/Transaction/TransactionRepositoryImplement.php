@@ -5,6 +5,7 @@ namespace App\Repositories\Transaction;
 use App\Helpers\Global\Constant;
 use LaravelEasyRepository\Implementations\Eloquent;
 use App\Models\Transaction;
+use Illuminate\Http\Request;
 
 class TransactionRepositoryImplement extends Eloquent implements TransactionRepository
 {
@@ -27,5 +28,14 @@ class TransactionRepositoryImplement extends Eloquent implements TransactionRepo
     else :
       return $this->model->latest();
     endif;
+  }
+
+  public function updateOrFail(int $id, Request $request, $reason)
+  {
+    $transaction = $this->findOrFail($id);
+    return $transaction->updateOrFail([
+      'status' => $request->status,
+      'reason' => $reason,
+    ]);
   }
 }

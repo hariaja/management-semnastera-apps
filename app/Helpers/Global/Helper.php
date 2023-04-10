@@ -28,9 +28,3 @@ function customDate($date, $show_day = true)
 
   return $text;
 }
-
-function formatRupiah($value)
-{
-  $format = "Rp " . number_format($value, 0, ',', '.');
-  return $format;
-}

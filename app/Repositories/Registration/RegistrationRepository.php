@@ -6,5 +6,5 @@ use LaravelEasyRepository\Repository;
 
 interface RegistrationRepository extends Repository
 {
-  // 
+  public function getOpenByDate();
 }

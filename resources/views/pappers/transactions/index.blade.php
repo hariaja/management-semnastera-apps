@@ -15,14 +15,16 @@
       <h3 class="block-title">
         {{ trans('page.transactions.index') }}
       </h3>
-      <div class="block-options">
-        @can('transactions.create')
-          <a href="{{ route('transactions.create') }}" class="btn btn-block-option text-secondary fw-semibold">
-            <i class="fa fa-plus fa-xs me-1"></i>
-            {{ trans('page.button.create') }}
-          </a>
-        @endcan
-      </div>
+      @if (isRoleName() !== Constant::ADMIN)
+        <div class="block-options">
+          @can('transactions.create')
+            <a href="{{ route('transactions.create') }}" class="btn btn-block-option text-secondary fw-semibold">
+              <i class="fa fa-plus fa-xs me-1"></i>
+              {{ trans('page.button.create') }}
+            </a>
+          @endcan
+        </div>
+      @endif
     </div>
     <div class="block-content">
 

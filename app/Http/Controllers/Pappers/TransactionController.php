@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Pappers;
 
 use App\DataTables\Pappers\TransactionDataTable;
 use App\DataTables\Scopes\StatusFilter;
+use App\Helpers\Global\Constant;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Pappers\TransactionRequest;
+use App\Services\Registration\RegistrationService;
 use App\Services\Transaction\TransactionService;
 
 class TransactionController extends Controller
@@ -17,7 +20,8 @@ class TransactionController extends Controller
    * @return void
    */
   public function __construct(
-    protected TransactionService $transactionService
+    protected TransactionService $transactionService,
+    protected RegistrationService $registrationService
   ) {
     // 
   }
@@ -27,6 +31,14 @@ class TransactionController extends Controller
    */
   public function index(TransactionDataTable $dataTable, Request $request)
   {
+    $check = $this->registrationService->getOpenByDate();
+
+    if (isRoleName() !== Constant::ADMIN) :
+      if ($check->isEmpty()) :
+        return view('errors.close');
+      endif;
+    endif;
+
     return $dataTable->addScope(new StatusFilter($request))->render('pappers.transactions.index');
   }
 
@@ -35,15 +47,20 @@ class TransactionController extends Controller
    */
   public function create()
   {
-    //
+    if (isRoleName() === Constant::ADMIN) :
+      abort(403, trans('error.403'));
+    endif;
+
+    return view('pappers.transactions.create');
   }
 
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function store(TransactionRequest $request)
   {
-    //
+    $this->transactionService->handleCreateWithAvatar($request);
+    return redirect()->route('transactions.index')->withSuccess(trans('session.create'));
   }
 
   /**
@@ -51,7 +68,7 @@ class TransactionController extends Controller
    */
   public function show(Transaction $transaction)
   {
-    //
+    return view('pappers.transactions.show', compact('transaction'));
   }
 
   /**
@@ -67,7 +84,12 @@ class TransactionController extends Controller
    */
   public function update(Request $request, Transaction $transaction)
   {
-    //
+    $this->transactionService->updateOrFail(
+      $transaction->id,
+      $request,
+    );
+
+    return redirect()->route('transactions.index')->withSuccess(trans('session.update'));
   }
 
   /**

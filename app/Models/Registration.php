@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\Uuid;
 use App\Helpers\Global\Constant;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Registration extends Model
@@ -47,5 +48,18 @@ class Registration extends Model
     else :
       return '<span class="badge text-danger">' . Constant::CLOSE . '</span>';
     endif;
+  }
+
+  /**
+   * Scope a query to only include open registrations.
+   */
+  public function scopeOpen($data)
+  {
+    return $data->where('status', Constant::OPEN);
+  }
+
+  public function getOpen(): Collection
+  {
+    return $this->open()->get();
   }
 }

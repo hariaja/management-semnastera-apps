@@ -2,6 +2,7 @@
 
 namespace App\DataTables\Pappers;
 
+use App\Helpers\Global\Constant;
 use App\Models\Transaction;
 use App\Services\Transaction\TransactionService;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
@@ -95,6 +96,8 @@ class TransactionDataTable extends DataTable
    */
   public function getColumns(): array
   {
+    $visibility = isRoleName() === Constant::ADMIN ? true : false;
+
     return [
       Column::make('DT_RowIndex')
         ->title(trans('#'))
@@ -108,10 +111,14 @@ class TransactionDataTable extends DataTable
       Column::make('upload_date')
         ->title(trans('Tanggal Bayar'))
         ->addClass('text-center'),
+      Column::make('proof')
+        ->title(trans('Bukti'))
+        ->addClass('text-center'),
       Column::make('status')
         ->title(trans('Status'))
         ->addClass('text-center'),
       Column::computed('action')
+        // ->title('<i class="fa fa-cog"></i>')
         ->exportable(false)
         ->printable(false)
         ->width('15%')

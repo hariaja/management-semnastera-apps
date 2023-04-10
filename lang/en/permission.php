@@ -37,6 +37,7 @@ return [
     'name' => 'Management Transaksi',
     'index' => 'List Transaksi',
     'create' => 'Formulir Tambah Transaksi',
+    'show' => 'Detail Transaksi',
     'store' => 'Menambahkan Transaksi',
     'edit' => 'Formulir Ubah Transaksi',
     'update' => 'Memperbarui Transaksi',
