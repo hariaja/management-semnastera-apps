@@ -44,6 +44,7 @@ class RoleSeeder extends Seeder
         ->orWhere('name', 'LIKE', 'transactions.store')
         ->orWhere('name', 'LIKE', 'transactions.show')
         ->orWhere('name', 'LIKE', 'transactions.destroy')
+        ->orWhere('name', 'LIKE', 'journals.%')
         ->get()
     );
 

@@ -17,8 +17,8 @@ class RegistrationSeeder extends Seeder
     $items = [
       [
         'title' => 'Jadwal Submit Makalah',
-        'date_start' => '2023-03-01',
-        'date_end' => '2023-03-06',
+        'date_start' => '2023-04-10',
+        'date_end' => '2023-04-16',
         'status' => Constant::OPEN,
       ],
       [

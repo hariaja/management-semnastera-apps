@@ -200,6 +200,43 @@ class PermissionSeeder extends Seeder
         'created_at' => now(),
         'updated_at' => now()
       ],
+
+      // Halaman Journals
+      [
+        'name' => 'journals.index',
+        'permission_category_id' => 5,
+        'guard_name' => 'web',
+        'created_at' => now(),
+        'updated_at' => now()
+      ],
+      [
+        'name' => 'journals.create',
+        'permission_category_id' => 5,
+        'guard_name' => 'web',
+        'created_at' => now(),
+        'updated_at' => now()
+      ],
+      [
+        'name' => 'journals.store',
+        'permission_category_id' => 5,
+        'guard_name' => 'web',
+        'created_at' => now(),
+        'updated_at' => now()
+      ],
+      [
+        'name' => 'journals.show',
+        'permission_category_id' => 5,
+        'guard_name' => 'web',
+        'created_at' => now(),
+        'updated_at' => now()
+      ],
+      [
+        'name' => 'journals.destroy',
+        'permission_category_id' => 5,
+        'guard_name' => 'web',
+        'created_at' => now(),
+        'updated_at' => now()
+      ],
     ];
 
     $collects = collect($permissions);

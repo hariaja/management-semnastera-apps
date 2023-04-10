@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Pappers\JournalController;
 use App\Http\Controllers\Settings\RoleController;
 use App\Http\Controllers\Settings\UserController;
 use App\Http\Controllers\Settings\PasswordController;
@@ -48,5 +49,6 @@ Route::middleware(['auth', 'permission', 'verified'])->group(function () {
   Route::prefix('pappers')->group(function () {
     Route::resource('transactions', TransactionController::class)->except('edit');
     Route::resource('registrations', RegistrationController::class)->except('show');
+    Route::resource('journals', JournalController::class)->except('edit', 'update');
   });
 });

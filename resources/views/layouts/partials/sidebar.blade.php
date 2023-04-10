@@ -43,7 +43,7 @@
           </a>
         </li>
 
-        @canany(['registrations.index', 'transactions.index'])
+        @canany(['registrations.index', 'transactions.index', 'jpurnals.index'])
           <li class="nav-main-heading">{{ trans('Papper') }}</li>
           <li class="nav-main-item {{ request()->is('pappers*') ? 'open' : '' }}">
             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="{{ request()->is('pappers*') ? 'true' : 'false' }}" href="#">
@@ -51,6 +51,13 @@
               <span class="nav-main-link-name">{{ trans('Papper') }}</span>
             </a>
             <ul class="nav-main-submenu">
+              @can('journals.index')
+                <li class="nav-main-item">
+                  <a class="nav-main-link {{ request()->is('pappers/journals*') ? 'active' : '' }}" href="{{ route('journals.index') }}">
+                    <span class="nav-main-link-name">{{ trans('Makalah') }}</span>
+                  </a>
+                </li>
+              @endcan
               @can('transactions.index')
                 <li class="nav-main-item">
                   <a class="nav-main-link {{ request()->is('pappers/transactions*') ? 'active' : '' }}" href="{{ route('transactions.index') }}">

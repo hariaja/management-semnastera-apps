@@ -26,7 +26,7 @@
     </div>
     <div class="block-content">
 
-      <div class="row justify-content-center">
+      <div class="row">
         <div class="col-md-4">
           <div class="mb-4">
             <label for="status" class="form-label">{{ trans('Filter Status') }}</label>

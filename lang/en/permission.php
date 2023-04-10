@@ -43,4 +43,15 @@ return [
     'update' => 'Memperbarui Transaksi',
     'destroy' => 'Menghapus Transaksi',
   ],
+
+  'journals' => [
+    'name' => 'Management Makalah',
+    'index' => 'List Makalah',
+    'create' => 'Formulir Tambah Makalah',
+    'show' => 'Detail Makalah',
+    'store' => 'Menambahkan Makalah',
+    'edit' => 'Formulir Ubah Makalah',
+    'update' => 'Memperbarui Makalah',
+    'destroy' => 'Menghapus Makalah',
+  ],
 ];

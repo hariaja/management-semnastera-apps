@@ -18,6 +18,7 @@ class PermissionCategorySeeder extends Seeder
       'roles.name',
       'registrations.name',
       'transactions.name',
+      'journals.name',
     ];
 
     foreach ($items as $item) :
