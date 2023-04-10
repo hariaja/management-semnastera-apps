@@ -40,7 +40,7 @@ class TransactionServiceImplement extends Service implements TransactionService
     return $return;
   }
 
-  public function handleCreateWithAvatar(Request $request)
+  public function handleCreateWithImage(Request $request)
   {
     DB::beginTransaction();
     try {

@@ -59,7 +59,7 @@ class TransactionController extends Controller
    */
   public function store(TransactionRequest $request)
   {
-    $this->transactionService->handleCreateWithAvatar($request);
+    $this->transactionService->handleCreateWithImage($request);
     return redirect()->route('transactions.index')->withSuccess(trans('session.create'));
   }
 
